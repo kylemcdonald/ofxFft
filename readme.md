@@ -1,3 +1,5 @@
+To use ofxFft with FFTW make sure you download the precompiled libraries here: https://github.com/downloads/kylemcdonald/ofxFft/fftw-libs.zip
+
 Basic usage is demonstrated by ofxFftEq and ofxFftTest.
 
 To install ofxFft, move the ofxFft folder to your of/addons/ folder.
