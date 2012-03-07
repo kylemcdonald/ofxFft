@@ -8,19 +8,16 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
 	if(bufferSize < audioBufferSize) {
 		ofLogFatalError() << "ofxEasyFft bufferSize (" << bufferSize << ") must be less than the audioBufferSize (" << audioBufferSize << ")";
 	}
-	this->audioBufferSize = audioBufferSize;
-	this->audioSampleRate = audioSampleRate;
 	fft = ofxFft::create(bufferSize, windowType, implementation);
 	
-	binsFront.resize(fft->getBinSize());
-	binsMiddle.resize(fft->getBinSize());
-	binsBack.resize(fft->getBinSize());
+	bins.resize(fft->getBinSize());
 	
 	audioFront.resize(bufferSize);
 	audioMiddle.resize(bufferSize);
 	audioBack.resize(bufferSize);
+	audioRaw.resize(bufferSize);
 	
-	ofSoundStreamSetup(0, 1, this, audioSampleRate, audioBufferSize, 1);
+	ofSoundStreamSetup(0, 1, this, audioSampleRate, audioBufferSize, 2);
 }
 
 void ofxEasyFft::setUseNormalization(bool useNormalization) {
@@ -29,9 +26,13 @@ void ofxEasyFft::setUseNormalization(bool useNormalization) {
 
 void ofxEasyFft::update() {
 	soundMutex.lock();
-	binsFront = binsMiddle;
 	audioFront = audioMiddle;
-	soundMutex.unlock();		
+	soundMutex.unlock();
+	
+	fft->setSignal(&audioFront[0]);
+	float* curFft = fft->getAmplitude();
+	copy(curFft, curFft + fft->getBinSize(), bins.begin());
+	normalize(bins);
 }
 
 vector<float>& ofxEasyFft::getAudio() {
@@ -39,18 +40,18 @@ vector<float>& ofxEasyFft::getAudio() {
 }
 
 vector<float>& ofxEasyFft::getBins() {
-	return binsFront;
+	return bins;
 }
 
 void ofxEasyFft::audioReceived(float* input, int bufferSize, int nChannels) {
-	audioBack.assign(input, input + bufferSize);
+	if(audioRaw.size() > bufferSize) {
+		copy(audioRaw.begin() + bufferSize, audioRaw.end(), audioRaw.begin()); // shift old
+	}
+	copy(input, input + bufferSize, audioRaw.end() - bufferSize); // push new
+	copy(audioRaw.begin(), audioRaw.end(), audioBack.begin());
 	normalize(audioBack);
-	fft->setSignal(&audioBack[0]);
-	float* curFft = fft->getAmplitude();
-	binsBack.assign(curFft, curFft + fft->getBinSize());
-	normalize(binsBack);
+
 	soundMutex.lock();
-	binsMiddle = binsBack;
 	audioMiddle = audioBack;
 	soundMutex.unlock();
 }
