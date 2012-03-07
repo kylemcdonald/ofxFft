@@ -24,7 +24,8 @@ public:
 		fftImplementation implementation = OF_FFT_BASIC);
 	virtual ~ofxFft();
 
-	void setSignal(float* signal);
+	void setSignal(const vector<float>& signal);
+	void setSignal(const float* signal);
 	void setCartesian(float* real, float* imag = NULL);
 	void setPolar(float* amplitude, float* phase = NULL);
 
@@ -73,7 +74,7 @@ protected:
 	void prepareSignal();
 	void updateSignal();
 	void normalizeSignal();
-	void copySignal(float* signal);
+	void copySignal(const float* signal);
 
 	// frequency domain data and methods
 	int signalSize, binSize;

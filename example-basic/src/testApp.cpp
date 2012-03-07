@@ -2,38 +2,26 @@
 
 void testApp::setup() {
 	ofSetVerticalSync(true);
-
+	
 	plotHeight = 128;
-	bufferSize = 8192;
-
+	bufferSize = 2048;
+	
 	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
 	// To use FFTW, try:
 	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
-
-	spectrogram.allocate(512, fft->getBinSize() / 4, OF_IMAGE_GRAYSCALE);
-	memset(spectrogram.getPixels(), 0, (int) (spectrogram.getWidth() * spectrogram.getHeight()) );
-	spectrogramOffset = 0;
-
-	drawBuffer.resize(bufferSize);
-	middleBuffer.resize(bufferSize);
-	audioBuffer.resize(bufferSize);
 	
 	drawBins.resize(fft->getBinSize());
 	middleBins.resize(fft->getBinSize());
 	audioBins.resize(fft->getBinSize());
-
+	
 	// 0 output channels,
 	// 1 input channel
 	// 44100 samples per second
 	// [bins] samples per buffer
 	// 4 num buffers (latency)
-
+	
 	ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
-
-	mode = SINE;
-	appWidth = ofGetWidth();
-	appHeight = ofGetHeight();
-
+	
 	ofBackground(0, 0, 0);
 }
 
@@ -41,23 +29,16 @@ void testApp::draw() {
 	ofSetColor(255);
 	ofPushMatrix();
 	ofTranslate(16, 16);
-	ofDrawBitmapString("Time Domain", 0, 0);
 	
 	soundMutex.lock();
-	drawBuffer = middleBuffer;
 	drawBins = middleBins;
 	soundMutex.unlock();
 	
-	plot(drawBuffer, plotHeight / 2, 0);
-	ofTranslate(0, plotHeight + 16);
 	ofDrawBitmapString("Frequency Domain", 0, 0);
 	plot(drawBins, -plotHeight, plotHeight / 2);
-	ofTranslate(0, plotHeight + 16);
-	spectrogram.update();
-	spectrogram.draw(0, 0);
 	ofPopMatrix();
 	string msg = ofToString((int) ofGetFrameRate()) + " fps";
-	ofDrawBitmapString(msg, appWidth - 80, appHeight - 20);
+	ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
 }
 
 void testApp::plot(vector<float>& buffer, float scale, float offset) {
@@ -68,41 +49,29 @@ void testApp::plot(vector<float>& buffer, float scale, float offset) {
 	glTranslatef(0, plotHeight / 2 + offset, 0);
 	ofBeginShape();
 	for (int i = 0; i < n; i++) {
-		ofVertex(i, buffer[i] * scale);
+		ofVertex(i, sqrt(buffer[i]) * scale);
 	}
 	ofEndShape();
 	glPopMatrix();
 }
 
-void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
-	if (mode == MIC) {
-		// store input in audioInput buffer
-		memcpy(&audioBuffer[0], input, sizeof(float) * bufferSize);
-		
-		float maxValue = 0;
-		for(int i = 0; i < bufferSize; i++) {
-			if(abs(audioBuffer[i]) > maxValue) {
-				maxValue = abs(audioBuffer[i]);
-			}
+void testApp::audioReceived(float* input, int bufferSize, int nChannels) {	
+	float maxValue = 0;
+	for(int i = 0; i < bufferSize; i++) {
+		if(abs(input[i]) > maxValue) {
+			maxValue = abs(input[i]);
 		}
-		for(int i = 0; i < bufferSize; i++) {
-			audioBuffer[i] /= maxValue;
-		}
-		
-	} else if (mode == NOISE) {
-		for (int i = 0; i < bufferSize; i++)
-			audioBuffer[i] = ofRandom(-1, 1);
-	} else if (mode == SINE) {
-		for (int i = 0; i < bufferSize; i++)
-			audioBuffer[i] = sinf(PI * i * mouseX / appWidth);
+	}
+	for(int i = 0; i < bufferSize; i++) {
+		input[i] /= maxValue;
 	}
 	
-	fft->setSignal(&audioBuffer[0]);
-
+	fft->setSignal(input);
+	
 	float* curFft = fft->getAmplitude();
 	memcpy(&audioBins[0], curFft, sizeof(float) * fft->getBinSize());
-
-	float maxValue = 0;
+	
+	maxValue = 0;
 	for(int i = 0; i < fft->getBinSize(); i++) {
 		if(abs(audioBins[i]) > maxValue) {
 			maxValue = abs(audioBins[i]);
@@ -112,30 +81,7 @@ void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
 		audioBins[i] /= maxValue;
 	}
 	
-	int spectrogramWidth = (int) spectrogram.getWidth();
-	int spectrogramHeight = (int) spectrogram.getHeight();
-	unsigned char* pixels = spectrogram.getPixels();
-	for(int i = 0; i < spectrogramHeight; i++) {
-		pixels[i * spectrogramWidth + spectrogramOffset] = (unsigned char) (255. * audioBins[i]);
-	}
-	spectrogramOffset = (spectrogramOffset + 1) % spectrogramWidth;
-	
 	soundMutex.lock();
-	middleBuffer = audioBuffer;
 	middleBins = audioBins;
 	soundMutex.unlock();
-}
-
-void testApp::keyPressed(int key) {
-	switch (key) {
-	case 'm':
-		mode = MIC;
-		break;
-	case 'n':
-		mode = NOISE;
-		break;
-	case 's':
-		mode = SINE;
-		break;
-	}
 }

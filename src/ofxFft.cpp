@@ -101,7 +101,7 @@ void ofxFft::clear() {
 	memset(phase, 0, sizeof(float) * binSize);
 }
 
-void ofxFft::copySignal(float* signal) {
+void ofxFft::copySignal(const float* signal) {
 	memcpy(this->signal, signal, sizeof(float) * signalSize);
 }
 
@@ -260,7 +260,11 @@ void ofxFft::clearUpdates() {
 	signalNormalized = false;
 }
 
-void ofxFft::setSignal(float* signal) {
+void ofxFft::setSignal(const vector<float>& signal) {
+	setSignal(&signal[0]);
+}
+
+void ofxFft::setSignal(const float* signal) {
 	clearUpdates();
 	copySignal(signal);
 	signalUpdated = true;
