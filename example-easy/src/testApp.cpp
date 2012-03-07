@@ -2,7 +2,8 @@
 
 void testApp::setup() {
 	ofSetVerticalSync(true);	
-	fft.setup(1024);
+	ofSetFrameRate(60);
+	fft.setup(16384);
 }
 
 void testApp::update() {
@@ -12,20 +13,20 @@ void testApp::update() {
 void testApp::draw() {
 	ofBackground(0, 0, 0);
 	
-	ofSetColor(255);
 	ofPushMatrix();
 	ofTranslate(16, 16);
-	
+	ofSetColor(255);
 	ofDrawBitmapString("Frequency Domain", 0, 0);
 	plot(fft.getBins(), 128);
 	ofPopMatrix();
+	
 	string msg = ofToString((int) ofGetFrameRate()) + " fps";
 	ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
 }
 
 void testApp::plot(vector<float>& buffer, float scale) {
 	ofNoFill();
-	int n = buffer.size();
+	int n = MIN(1024, buffer.size());
 	ofRect(0, 0, n, scale);
 	ofPushMatrix();
 	ofTranslate(0, scale);
