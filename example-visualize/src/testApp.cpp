@@ -10,7 +10,7 @@ void testApp::setup() {
 	// To use FFTW, try:
 	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
 
-	spectrogram.allocate(512, fft->getBinSize(), OF_IMAGE_GRAYSCALE);
+	spectrogram.allocate(bufferSize, fft->getBinSize(), OF_IMAGE_GRAYSCALE);
 	memset(spectrogram.getPixels(), 0, (int) (spectrogram.getWidth() * spectrogram.getHeight()) );
 	spectrogramOffset = 0;
 
@@ -55,9 +55,15 @@ void testApp::draw() {
 	ofTranslate(0, plotHeight + 16);
 	spectrogram.update();
 	spectrogram.draw(0, 0);
+	ofRect(0, 0, bufferSize, bufferSize / 2);
+	ofDrawBitmapString("Spectrogram", 0, 0);
 	ofPopMatrix();
 	string msg = ofToString((int) ofGetFrameRate()) + " fps";
 	ofDrawBitmapString(msg, appWidth - 80, appHeight - 20);
+}
+
+float powFreq(float i) {
+	return powf(i, 3);
 }
 
 void testApp::plot(vector<float>& buffer, float scale, float offset) {
@@ -113,10 +119,12 @@ void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	}
 	
 	int spectrogramWidth = (int) spectrogram.getWidth();
-	int spectrogramHeight = (int) spectrogram.getHeight();
+	int n = (int) spectrogram.getHeight();
 	unsigned char* pixels = spectrogram.getPixels();
-	for(int i = 0; i < spectrogramHeight; i++) {
-		pixels[i * spectrogramWidth + spectrogramOffset] = (unsigned char) (255. * audioBins[i]);
+	for(int i = 0; i < n; i++) {
+		int j = (n - i - 1) * spectrogramWidth + spectrogramOffset;
+		int logi = ofMap(powFreq(i), powFreq(0), powFreq(n), 0, n);
+		pixels[j] = (unsigned char) (255. * audioBins[logi]);
 	}
 	spectrogramOffset = (spectrogramOffset + 1) % spectrogramWidth;
 	
