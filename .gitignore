@@ -11,5 +11,4 @@ bin/
 build/
 !data/
 
-fftw/
-kiss/
+fftw/lib/
