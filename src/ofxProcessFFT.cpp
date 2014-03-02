@@ -25,8 +25,8 @@ void ProcessFFT::setup(){
     
     delta = loudestBand = noisiness = maxSound = avgMaxSoundOverTime = 0;
     
-    normalize = true;
-    volumeRange = 100; //only used if normalize is false
+    normalize = false;
+    volumeRange = 400; //only used if normalize is false
 
 }
 
@@ -410,12 +410,16 @@ float ProcessFFT::getSmoothedUnScaledLoudestValue(){
     return avgMaxSoundOverTime;
 }
 
-vector<float> ProcessFFT::getNormalizedSpectrum(){
+vector<float> ProcessFFT::getSpectrum(){
     return fftSpectrum;
 }
 
 float ProcessFFT::getNoisiness(){
     return noisiness;
+}
+
+bool ProcessFFT::getNormalized(){
+    return normalize;
 }
 
 float ProcessFFT::getLoudBand(){

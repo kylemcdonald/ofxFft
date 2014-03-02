@@ -25,13 +25,14 @@ public:
     float getMidVal();
     float getHighVal();
     float getNoisiness(); //not currently implemented
+    bool  getNormalized();
     float getSpectralCentroid(); //this is not currently implemented
     float getDelta();
     float getUnScaledLoudestValue();
     float getSmoothedUnScaledLoudestValue();
     
     float getIntensityAtFrequency(float _freq);
-    vector<float> getNormalizedSpectrum();
+    vector<float> getSpectrum();
     
     
     int getNumFFTbins();
@@ -52,30 +53,30 @@ public:
     
 private:
     
-    bool normalize; //decide if you want the values between 0 and 1 or between 0 - 1000
-    int volumeRange; //use if you're not normalizing so you can give things a proper range for visualization
+    bool    normalize; //decide if you want the values between 0 and 1 or between 0 - 1000
+    int     volumeRange; //use if you're not normalizing so you can give things a proper range for visualization
     
-    int scaleFactor; //this is arbitrary - it raises the FFT numbers so they aren't 0.0000054
-    int numBins;
-    float noisiness;
-    float spectralCentroid;
+    int     scaleFactor; //this is arbitrary - it raises the FFT numbers so they aren't 0.0000054
+    int     numBins;
+    float   noisiness;
+    float   spectralCentroid;
     
-    float delta;
+    float   delta;
 
-    void calculateFFT(vector<float>& buffer, float FFTpercentage, int numFFTbins);
+    void    calculateFFT(vector<float>& buffer, float FFTpercentage, int numFFTbins);
     
-    bool saveHistory;
-    int graphMaxSize; //number of frames that the values average over if you want a longer tail
+    bool    saveHistory;
+    int     graphMaxSize; //number of frames that the values average over if you want a longer tail
     
-    int numFFTbins; //how many Columns are we analyzing - 16-32, etc
-    float FFTpercentage; //how much of the FFT are we parsing out into bins? usually around 20% of the whole 0-5khz
-    float exponent; //this is a factor for making the high end be valued slightly more than the low end since the bass tends to be higher energy than the high end in FFT - in a range from 1.0-1.6
+    int     numFFTbins; //how many Columns are we analyzing - 16-32, etc
+    float   FFTpercentage; //how much of the FFT are we parsing out into bins? usually around 20% of the whole 0-5khz
+    float   exponent; //this is a factor for making the high end be valued slightly more than the low end since the bass tends to be higher energy than the high end in FFT - in a range from 1.0-1.6
     
-    int loudestBand; //for each frame - this is the loudest frequency band at that time
+    int     loudestBand; //for each frame - this is the loudest frequency band at that time
     
-    float maxSound; //this is the loudest sound for each frame - unnormalized
+    float   maxSound; //this is the loudest sound for each frame - unnormalized
     
-    float avgMaxSoundOverTime; //average max sound in relation to the graph max sound
+    float   avgMaxSoundOverTime; //average max sound in relation to the graph max sound
     
     vector <float> fftSpectrum; //this holds the amplitudes of multiple columns of the FFT
     vector <float> graphLow;
