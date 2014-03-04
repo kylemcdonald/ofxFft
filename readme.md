@@ -1,5 +1,8 @@
 # ofxFft is an addon for [openFrameworks](http://openframeworks.cc/)
 
+This fork adds a new class and example: ofxProcessFFT that does some additional processing of the FFT to give you some less abstracted data (ie EQ bands, low/mid/high values, spectral centroid, noisiness, volume history, normalization)
+
+
 ofxFft wraps two libraries with the same interface: FFTW and KISS FFT. KISS FFT is MIT licensed, and enabled by default. FFTW is GPL, and can be enabled using the `#define USE_FFTW` flag.
 
 To use ofxFft with FFTW make sure you download the [precompiled libraries](https://github.com/downloads/kylemcdonald/ofxFft/fftw-libs.zip).
