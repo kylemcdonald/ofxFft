@@ -1,8 +1,10 @@
+#include "ofMain.h"
 #include "ofxFft.h"
 
-class ofxEasyFft : ofBaseApp {
+class ofxEasyFft : public ofBaseSoundInput{
 public:
 	ofxEasyFft();
+    ~ofxEasyFft();
 	void setup(int bufferSize = 512,
 						 fftWindowType windowType = OF_FFT_WINDOW_HAMMING,
 						 fftImplementation implementation = OF_FFT_FFTW,
@@ -13,10 +15,11 @@ public:
 	vector<float>& getAudio();
 	vector<float>& getBins();
 	
+    void audioReceived(ofAudioEventArgs & args);
 	void audioReceived(float* input, int bufferSize, int nChannels);
 	
 	ofxFft* fft;
-	
+	ofSoundStream stream;
 private:
 	bool useNormalization;
 	ofMutex soundMutex;
@@ -24,4 +27,5 @@ private:
 	vector<float> bins;
 	
 	void normalize(vector<float>& data);
+
 };

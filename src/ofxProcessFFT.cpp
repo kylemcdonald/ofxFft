@@ -401,6 +401,7 @@ float ProcessFFT::getDelta(){
     return delta; //if the delta is greater than a percentage of the maximum volume, then trigger an event (delta scales to maximum volume)
 }
 
+
 float ProcessFFT::getUnScaledLoudestValue(){
     //This returns the unnormalized value of the current loudest sound - useful for detecting whether the volume input is low or really high
     return maxSound;
