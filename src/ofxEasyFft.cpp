@@ -3,6 +3,9 @@
 ofxEasyFft::ofxEasyFft()
 :useNormalization(true) {
 }
+ofxEasyFft::~ofxEasyFft(){
+    stream.close();
+}
 
 void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementation implementation, int audioBufferSize, int audioSampleRate) {
 	if(bufferSize < audioBufferSize) {
@@ -17,7 +20,11 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
 	audioBack.resize(bufferSize);
 	audioRaw.resize(bufferSize);
 	
-	ofSoundStreamSetup(0, 1, this, audioSampleRate, audioBufferSize, 2);
+    stream.listDevices();
+    stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
+    stream.setInput(this);
+    
+
 }
 
 void ofxEasyFft::setUseNormalization(bool useNormalization) {
@@ -33,6 +40,10 @@ void ofxEasyFft::update() {
 	float* curFft = fft->getAmplitude();
 	copy(curFft, curFft + fft->getBinSize(), bins.begin());
 	normalize(bins);
+}
+
+void ofxEasyFft::audioReceived(ofAudioEventArgs & args){
+    audioReceived(args.buffer, args.bufferSize, args.nChannels);
 }
 
 vector<float>& ofxEasyFft::getAudio() {
@@ -55,6 +66,8 @@ void ofxEasyFft::audioReceived(float* input, int bufferSize, int nChannels) {
 	audioMiddle = audioBack;
 	soundMutex.unlock();
 }
+
+
 
 void ofxEasyFft::normalize(vector<float>& data) {
 	if(useNormalization) {

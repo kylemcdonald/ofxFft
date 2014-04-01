@@ -14,7 +14,6 @@ public:
     
     void setup(); //whether you want your sounds in a 0-1 range or a 0-volumeRange - setting volume range doesn't matter if you're normalizing
     void update();
-    
     //For Debugging audio trends
     void drawHistoryGraph(ofPoint pt, fftRangeType drawType);
     
