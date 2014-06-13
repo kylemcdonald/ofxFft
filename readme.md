@@ -11,13 +11,13 @@ To install ofxFft, move the ofxFft folder to your `of/addons/` folder.
 With each project, you need to:
 
 1. Add to your compiler search path:
-  `of/addons/ofxFft/src/`  
-  `of/addons/ofxFft/libs/kiss`
+  - `of/addons/ofxFft/src`  
+  - `of/addons/ofxFft/libs/kiss`
 
 2. If you're using FFTW on Windows, you'll also need to add:
-  of/libs/fftw/include/
+  - `of/addons/ofxFft/libs/fftw/include`
   And link with:
-  of/addons/lib/fftw/lib/win32/libfftw3f-3.dll
+  - `of/addons/ofxFft/libs/fftw/lib/win32libfftw3f-3.dll`
 
 
 If you're not using FFTW on Windows, you'll need to remove the line:
