@@ -16,8 +16,9 @@ With each project, you need to:
 
 2. If you're using FFTW on Windows, you'll also need to add:
   - `of/addons/ofxFft/libs/fftw/include`
+
   And link with:
-  - `of/addons/ofxFft/libs/fftw/lib/win32libfftw3f-3.dll`
+  - `of/addons/ofxFft/libs/fftw/lib/win32/libfftw3f-3.dll`
 
 
 If you're not using FFTW on Windows, you'll need to remove the line:
