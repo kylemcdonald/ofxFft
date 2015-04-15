@@ -2,7 +2,7 @@
 
 #include "ofxFftBasic.h"
 
-#ifdef ALLOW_FFTW
+#ifdef OFX_FFT_USE_FFTW
 	#include "ofxFftw.h"
 #endif
 
@@ -11,10 +11,10 @@ ofxFft* ofxFft::create(int signalSize, fftWindowType windowType, fftImplementati
 	if(implementation == OF_FFT_BASIC) {
 		fft = new ofxFftBasic();
 	} else if(implementation == OF_FFT_FFTW) {
-		#ifdef ALLOW_FFTW
+		#ifdef OFX_FFT_USE_FFTW
 			fft = new ofxFftw();
 		#else
-			ofLog(OF_LOG_FATAL_ERROR, "You need to add #define ALLOW_FFTW");
+			ofLog(OF_LOG_FATAL_ERROR, "You need to add define OFX_FFT_USE_FFTW");
 		#endif
 	}
 	fft->setup(signalSize, windowType);
