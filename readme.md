@@ -33,11 +33,10 @@ With each project, you need to:
 	* right-click on your project in the project tree
 	* select "Build options..."
 	* make sure the project name is selected in the tree (not release or debug)
-	* select the "Compiler settings" tab
-	  * add the following to the "#defines" tab:
-	  <pre>
-	  OFX_FFT_USE_FFTW
-	  </pre>
+	* select the "Compiler settings" tab and add the following to the "#defines" tab:
+	<pre>
+	OFX_FFT_USE_FFTW
+	</pre>
 
 
 3. If you're using FFTW on Windows, you'll also need to add:
