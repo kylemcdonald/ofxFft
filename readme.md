@@ -23,21 +23,21 @@ With each project, you need to:
 	-DOFX_FFT_USE_FFTW
 	</pre>
 
- - Linux (Makefiles & Codeblocks):
-  * edit config.make in your project folder and add the following to the USER_CFLAGS line:
+  - Linux (Makefiles & Codeblocks):
+    * edit config.make in your project folder and add the following to the USER_CFLAGS line:
     <pre>
-	-DOFX_FFT_USE_FFTW
-	</pre>
+    -DOFX_FFT_USE_FFTW
+    </pre>
 	
- - Codeblocks (Win):
+  - Codeblocks (Win):
 	* right-click on your project in the project tree
 	* select "Build options..."
 	* make sure the project name is selected in the tree (not release or debug)
 	* select the "Compiler settings" tab
 	  * add the following to the "#defines" tab:
-	<pre>
-	OFX_FFT_USE_FFTW
-	</pre>
+	  <pre>
+	  OFX_FFT_USE_FFTW
+	  </pre>
 
 
 3. If you're using FFTW on Windows, you'll also need to add:
