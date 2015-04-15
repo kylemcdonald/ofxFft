@@ -11,7 +11,7 @@ public:
 						 fftWindowType windowType = OF_FFT_WINDOW_HAMMING,
 						 fftImplementation implementation = OF_FFT_FFTW,
 						 int audioBufferSize = 256,
-						 int audioSampleRate = 48000);
+						 int audioSampleRate = 44100);
 	void setUseNormalization(bool useNormalization);
 	void update();
 	vector<float>& getAudio();
