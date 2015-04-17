@@ -37,7 +37,15 @@ With each project, you need to:
 	<pre>
 	OFX_FFT_USE_FFTW
 	</pre>
-
+	
+  - Visual Studio:
+    * right click on the project in the project tree and select Properties
+    * set the Configuration to All Configurations
+    * add the defines and search paths:
+    * add the following to Configuration Properties->C/C++->Preprocessor->Preprocessor Definitions:
+    <pre>
+	OFX_FFT_USE_FFTW
+	</pre>
 
 3. If you're using FFTW on Windows, you'll also need to add:
   - `of/addons/ofxFft/libs/fftw/include`
