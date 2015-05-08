@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef OFX_FFT_USE_FFTW
+
 #include "ofxFft.h"
 #include "fftw3.h"
 
@@ -15,3 +17,5 @@ private:
 	float *fftIn, *fftOut, *ifftIn, *ifftOut;
 	fftwf_plan fftPlan, ifftPlan;
 };
+
+#endif
