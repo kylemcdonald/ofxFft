@@ -7,7 +7,7 @@
 #define NOISE 1
 #define SINE 2
 
-class testApp : public ofBaseApp {
+class ofApp : public ofBaseApp {
 public:
 	void setup();
 	void plot(float* array, int length, float scale, float offset);

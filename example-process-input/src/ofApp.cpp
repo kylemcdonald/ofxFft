@@ -1,17 +1,17 @@
-#include "testApp.h"
+#include "ofApp.h"
 
-void testApp::setup() {
+void ofApp::setup() {
 	ofSetVerticalSync(true);	
 	ofSetFrameRate(60);
 	fft.setup();
     
 }
 
-void testApp::update() {
+void ofApp::update() {
 	fft.update();
 }
 
-void testApp::draw() {
+void ofApp::draw() {
     fft.drawBars();
     fft.drawDebug();
     
@@ -35,7 +35,7 @@ void testApp::draw() {
     
 }
 
-void testApp::keyPressed(int key){
+void ofApp::keyPressed(int key){
     
     //toggle between normalized and not to get a sense of the effects
     //You will need to set a volume range if you're not normalizing everything - but this will depend on your sound source and input type to determine the maximum volume range of your codez

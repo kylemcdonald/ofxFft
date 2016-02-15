@@ -1,6 +1,6 @@
-#include "testApp.h"
+#include "ofApp.h"
 
-void testApp::setup() {
+void ofApp::setup() {
 	plotHeight = 128;
 	bufferSize = 512;
 
@@ -33,7 +33,7 @@ void testApp::setup() {
 	ofBackground(0, 0, 0);
 }
 
-void testApp::draw() {
+void ofApp::draw() {
 	ofSetColor(0xffffff);
 	ofPushMatrix();
 
@@ -60,7 +60,7 @@ void testApp::draw() {
 	ofDrawBitmapString(msg, appWidth - 80, appHeight - 20);
 }
 
-void testApp::plot(float* array, int length, float scale, float offset) {
+void ofApp::plot(float* array, int length, float scale, float offset) {
 	ofNoFill();
 	ofDrawRectangle(0, 0, length, plotHeight);
 	glPushMatrix();
@@ -72,7 +72,7 @@ void testApp::plot(float* array, int length, float scale, float offset) {
 	glPopMatrix();
 }
 
-void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
+void ofApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	if (mode == MIC) {
 		// store input in audioInput buffer
 		memcpy(audioInput, input, sizeof(float) * bufferSize);
@@ -96,7 +96,7 @@ void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	memcpy(ifftOutput, fft->getSignal(), sizeof(float) * fft->getSignalSize());
 }
 
-void testApp::keyPressed(int key) {
+void ofApp::keyPressed(int key) {
 	switch (key) {
 	case 'm':
 		mode = MIC;

@@ -1,16 +1,16 @@
-#include "testApp.h"
+#include "ofApp.h"
 
-void testApp::setup() {
+void ofApp::setup() {
 	ofSetVerticalSync(true);	
 	ofSetFrameRate(60);
 	fft.setup(16384);
 }
 
-void testApp::update() {
+void ofApp::update() {
 	fft.update();
 }
 
-void testApp::draw() {
+void ofApp::draw() {
 	ofBackground(0, 0, 0);
 	
 	ofPushMatrix();
@@ -24,7 +24,7 @@ void testApp::draw() {
 	ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
 }
 
-void testApp::plot(vector<float>& buffer, float scale) {
+void ofApp::plot(vector<float>& buffer, float scale) {
 	ofNoFill();
 	int n = MIN(1024, buffer.size());
 	ofDrawRectangle(0, 0, n, scale);

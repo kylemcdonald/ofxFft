@@ -1,6 +1,6 @@
-#include "testApp.h"
+#include "ofApp.h"
 
-void testApp::setup() {
+void ofApp::setup() {
 	ofSetVerticalSync(true);
 
 	plotHeight = 128;
@@ -37,7 +37,7 @@ void testApp::setup() {
 	ofBackground(0, 0, 0);
 }
 
-void testApp::draw() {
+void ofApp::draw() {
 	ofSetColor(255);
 	ofPushMatrix();
 	ofTranslate(16, 16);
@@ -66,7 +66,7 @@ float powFreq(float i) {
 	return powf(i, 3);
 }
 
-void testApp::plot(vector<float>& buffer, float scale, float offset) {
+void ofApp::plot(vector<float>& buffer, float scale, float offset) {
 	ofNoFill();
 	int n = buffer.size();
 	ofDrawRectangle(0, 0, n, plotHeight);
@@ -80,7 +80,7 @@ void testApp::plot(vector<float>& buffer, float scale, float offset) {
 	glPopMatrix();
 }
 
-void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
+void ofApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	if (mode == MIC) {
 		// store input in audioInput buffer
 		memcpy(&audioBuffer[0], input, sizeof(float) * bufferSize);
@@ -134,7 +134,7 @@ void testApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	soundMutex.unlock();
 }
 
-void testApp::keyPressed(int key) {
+void ofApp::keyPressed(int key) {
 	switch (key) {
 	case 'm':
 		mode = MIC;

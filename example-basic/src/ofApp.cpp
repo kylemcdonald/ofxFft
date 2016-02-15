@@ -1,6 +1,6 @@
-#include "testApp.h"
+#include "ofApp.h"
 
-void testApp::setup() {
+void ofApp::setup() {
 	ofSetVerticalSync(true);
 	
 	plotHeight = 128;
@@ -25,7 +25,7 @@ void testApp::setup() {
 	ofBackground(0, 0, 0);
 }
 
-void testApp::draw() {
+void ofApp::draw() {
 	ofSetColor(255);
 	ofPushMatrix();
 	ofTranslate(16, 16);
@@ -41,7 +41,7 @@ void testApp::draw() {
 	ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
 }
 
-void testApp::plot(vector<float>& buffer, float scale, float offset) {
+void ofApp::plot(vector<float>& buffer, float scale, float offset) {
 	ofNoFill();
 	int n = buffer.size();
 	ofDrawRectangle(0, 0, n, plotHeight);
@@ -55,7 +55,7 @@ void testApp::plot(vector<float>& buffer, float scale, float offset) {
 	glPopMatrix();
 }
 
-void testApp::audioReceived(float* input, int bufferSize, int nChannels) {	
+void ofApp::audioReceived(float* input, int bufferSize, int nChannels) {	
 	float maxValue = 0;
 	for(int i = 0; i < bufferSize; i++) {
 		if(abs(input[i]) > maxValue) {

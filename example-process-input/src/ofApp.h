@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ofMain.h"
+#include "ofApp.h"
 #include "ofxProcessFFT.h"
 
-class testApp : public ofBaseApp {
+class ofApp : public ofBaseApp {
 public:
 	void setup();
 	void update();
