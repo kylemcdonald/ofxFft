@@ -20,7 +20,7 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
 	audioBack.resize(bufferSize);
 	audioRaw.resize(bufferSize);
 	
-    stream.listDevices();
+    stream.getDeviceList();
     stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
     stream.setInput(this);
     

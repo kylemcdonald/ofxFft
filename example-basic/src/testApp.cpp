@@ -44,7 +44,7 @@ void testApp::draw() {
 void testApp::plot(vector<float>& buffer, float scale, float offset) {
 	ofNoFill();
 	int n = buffer.size();
-	ofRect(0, 0, n, plotHeight);
+	ofDrawRectangle(0, 0, n, plotHeight);
 	glPushMatrix();
 	glTranslatef(0, plotHeight / 2 + offset, 0);
 	ofBeginShape();

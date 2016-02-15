@@ -55,7 +55,7 @@ void testApp::draw() {
 	ofTranslate(0, plotHeight + 16);
 	spectrogram.update();
 	spectrogram.draw(0, 0);
-	ofRect(0, 0, bufferSize, bufferSize / 2);
+	ofDrawRectangle(0, 0, bufferSize, bufferSize / 2);
 	ofDrawBitmapString("Spectrogram", 0, 0);
 	ofPopMatrix();
 	string msg = ofToString((int) ofGetFrameRate()) + " fps";
@@ -69,7 +69,7 @@ float powFreq(float i) {
 void testApp::plot(vector<float>& buffer, float scale, float offset) {
 	ofNoFill();
 	int n = buffer.size();
-	ofRect(0, 0, n, plotHeight);
+	ofDrawRectangle(0, 0, n, plotHeight);
 	glPushMatrix();
 	glTranslatef(0, plotHeight / 2 + offset, 0);
 	ofBeginShape();

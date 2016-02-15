@@ -27,7 +27,7 @@ void testApp::draw() {
 void testApp::plot(vector<float>& buffer, float scale) {
 	ofNoFill();
 	int n = MIN(1024, buffer.size());
-	ofRect(0, 0, n, scale);
+	ofDrawRectangle(0, 0, n, scale);
 	ofPushMatrix();
 	ofTranslate(0, scale);
 	ofScale(1, -scale);

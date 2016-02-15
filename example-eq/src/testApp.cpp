@@ -62,7 +62,7 @@ void testApp::draw() {
 
 void testApp::plot(float* array, int length, float scale, float offset) {
 	ofNoFill();
-	ofRect(0, 0, length, plotHeight);
+	ofDrawRectangle(0, 0, length, plotHeight);
 	glPushMatrix();
 	glTranslatef(0, plotHeight / 2 + offset, 0);
 	ofBeginShape();

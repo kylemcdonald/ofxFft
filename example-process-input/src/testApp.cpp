@@ -16,10 +16,10 @@ void testApp::draw() {
     fft.drawDebug();
     
     ofNoFill();
-    ofRect(824, 0, 200, 200);
-    ofRect(824, 200, 200, 200);
-    ofRect(824, 400, 200, 200);
-    ofRect(824, 600, 200, 200);
+    ofDrawRectangle(824, 0, 200, 200);
+    ofDrawRectangle(824, 200, 200, 200);
+    ofDrawRectangle(824, 400, 200, 200);
+    ofDrawRectangle(824, 600, 200, 200);
     
     fft.drawHistoryGraph(ofPoint(824,0), LOW);
     fft.drawHistoryGraph(ofPoint(824,200),MID );
