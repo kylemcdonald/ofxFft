@@ -11,8 +11,8 @@ void ofApp::setup() {
 	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
 
 	spectrogram.allocate(bufferSize, fft->getBinSize(), OF_IMAGE_GRAYSCALE);
-	memset(spectrogram.getPixels(), 0, (int) (spectrogram.getWidth() * spectrogram.getHeight()) );
-	spectrogramOffset = 0;
+    spectrogram.setColor(ofColor::black);
+    spectrogramOffset = 0;
 
 	drawBuffer.resize(bufferSize);
 	middleBuffer.resize(bufferSize);
@@ -120,11 +120,11 @@ void ofApp::audioReceived(float* input, int bufferSize, int nChannels) {
 	
 	int spectrogramWidth = (int) spectrogram.getWidth();
 	int n = (int) spectrogram.getHeight();
-	unsigned char* pixels = spectrogram.getPixels();
+
 	for(int i = 0; i < n; i++) {
 		int j = (n - i - 1) * spectrogramWidth + spectrogramOffset;
 		int logi = ofMap(powFreq(i), powFreq(0), powFreq(n), 0, n);
-		pixels[j] = (unsigned char) (255. * audioBins[logi]);
+        spectrogram.setColor(j, (unsigned char) (255. * audioBins[logi]));
 	}
 	spectrogramOffset = (spectrogramOffset + 1) % spectrogramWidth;
 	
