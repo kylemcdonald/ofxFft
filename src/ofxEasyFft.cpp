@@ -21,7 +21,7 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
 	audioBack.resize(bufferSize);
 	audioRaw.resize(bufferSize);
 	
-    stream.listDevices();
+    stream.getDeviceList();
     stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
     stream.setInput(this);
 }
@@ -41,9 +41,10 @@ void ofxEasyFft::update() {
 	normalize(bins);
 }
 
-void ofxEasyFft::audioReceived(ofAudioEventArgs & args){
-    audioReceived(args.buffer, args.bufferSize, args.nChannels);
-}
+
+//void ofxEasyFft::audioReceived(ofAudioEventArgs & args){
+//    audioReceived(args.buffer, args.bufferSize, args.nChannels);
+//}
 
 vector<float>& ofxEasyFft::getAudio() {
 	return audioFront;

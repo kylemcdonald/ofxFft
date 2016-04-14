@@ -224,7 +224,7 @@ void ProcessFFT::drawAvgGraph(ofPoint pt, vector<float> values, ofColor _color){
         
         ofEndShape(false);
         ofSetColor(255);
-        ofLine(0,ofMap(avgVal, 0, 1, 200, 0,true) , 200, ofMap(avgVal, 0, 1, 200, 0,true));
+        ofDrawLine(0,ofMap(avgVal, 0, 1, 200, 0,true) , 200, ofMap(avgVal, 0, 1, 200, 0,true));
         ofPopMatrix();
         ofDisableAlphaBlending();
     }else{
@@ -250,7 +250,7 @@ void ProcessFFT::drawAvgGraph(ofPoint pt, vector<float> values, ofColor _color){
         
         ofEndShape(false);
         ofSetColor(255);
-        ofLine(0,ofMap(avgVal, 0, volumeRange, 200, 0,true) , 200, ofMap(avgVal, 0, volumeRange, 200, 0,true));
+        ofDrawLine(0,ofMap(avgVal, 0, volumeRange, 200, 0,true) , 200, ofMap(avgVal, 0, volumeRange, 200, 0,true));
         ofPopMatrix();
         ofDisableAlphaBlending();
     }
@@ -294,7 +294,7 @@ void ProcessFFT::drawAvgGraphUnScaled(ofPoint pt, vector<float> values, ofColor 
     
     
     ofSetColor(255);
-    ofLine(0,ofMap(avgMaximum, 0, volumeRange, 200, 0,true) , 200, ofMap(avgMaximum, 0,volumeRange, 200, 0,true));
+    ofDrawLine(0,ofMap(avgMaximum, 0, volumeRange, 200, 0,true) , 200, ofMap(avgMaximum, 0,volumeRange, 200, 0,true));
 
     
         ofPopMatrix();
@@ -315,7 +315,7 @@ void ProcessFFT::drawBars(){
             ofSetColor(100,100,200);
         }
         ofNoFill();
-        ofRect(ofGetWidth()*((float)i/numFFTbins), ofGetHeight()-20, ofGetWidth()/numFFTbins, -ofMap(fftSpectrum[i], 0, 1, 0, ofGetHeight() -50));
+        ofDrawRectangle(ofGetWidth()*((float)i/numFFTbins), ofGetHeight()-20, ofGetWidth()/numFFTbins, -ofMap(fftSpectrum[i], 0, 1, 0, ofGetHeight() -50));
     }
     ofPopStyle();
     }else{
@@ -331,7 +331,7 @@ void ProcessFFT::drawBars(){
                 ofSetColor(100,100,200);
             }
             ofNoFill();
-            ofRect(ofGetWidth()*((float)i/numFFTbins), ofGetHeight()-20, ofGetWidth()/numFFTbins, -ofMap(fftSpectrum[i], 0, volumeRange, 0, ofGetHeight() -50));
+            ofDrawRectangle(ofGetWidth()*((float)i/numFFTbins), ofGetHeight()-20, ofGetWidth()/numFFTbins, -ofMap(fftSpectrum[i], 0, volumeRange, 0, ofGetHeight() -50));
         }
         ofPopStyle();
     }

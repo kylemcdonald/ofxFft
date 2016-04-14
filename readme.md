@@ -8,6 +8,8 @@ Basic usage is demonstrated by example-eq and example-basic.
 
 To install ofxFft, move the ofxFft folder to your `of/addons/` folder.
 
+Note: With ofx version 0.9.0, the project generator should add the compiler search paths for the project automatically if configured to include ofxFft.
+
 With each project, you need to:
 
 1. Add to your compiler search path:
@@ -53,6 +55,19 @@ With each project, you need to:
   And link with:
   - `of/addons/ofxFft/libs/fftw/lib/win32/libfftw3f-3.dll`
 
+If you're not using FFTW, you'll need to:
+
+1. From ofxFft.h, remove the line:
+
+	#define USE_FFTW
+
+2. In the example projects ofApp.cpp, uncomment the line:
+
+	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
+
+	and comment out the line:
+	
+	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
 
 FFTW was compiled with:
 
@@ -61,3 +76,5 @@ FFTW was compiled with:
     sudo make install
 
 which puts the static libraries in .libs
+
+Note that the library is compiled in 32-bit mode on both Windows and OS X.
