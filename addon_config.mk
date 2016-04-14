@@ -16,7 +16,7 @@
 
 meta:
 	ADDON_NAME = ofxFft
-	ADDON_DESCRIPTION = FFT addon for openFrameworks that wrapps FFTW and KissFFT.
+	ADDON_DESCRIPTION = FFT addon for openFrameworks that wraps FFTW and KISS FFT
 	ADDON_AUTHOR = 
 	ADDON_TAGS = "FFT" "FFTW" "KissFFT" 
 	ADDON_URL = https://github.com/kylemcdonald/ofxFft
