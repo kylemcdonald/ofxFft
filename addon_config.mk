@@ -69,115 +69,25 @@ common:
 	# ADDON_INCLUDES_EXCLUDE =
 
 linux64:
-	# linux only, any library that should be included in the project using
-	# pkg-config
-	ADDON_PKG_CONFIG_LIBRARIES = 
-
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	ADDON_SOURCES_EXCLUDE = 
-	ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
-	ADDON_INCLUDES_EXCLUDE += libs/libusb-win32/%
-	ADDON_INCLUDES_EXCLUDE += libs/libusb-1.0/%
 
 linux:
-	# linux only, any library that should be included in the project using
-	# pkg-config
-	#ADDON_PKG_CONFIG_LIBRARIES = 
-
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	#ADDON_SOURCES_EXCLUDE = 
-	#ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE = 
-	#ADDON_INCLUDES_EXCLUDE += 
 
 msys2:
-	# any library that should be included in the project using pkg-config
-	#ADDON_PKG_CONFIG_LIBRARIES = 
-
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	#ADDON_SOURCES_EXCLUDE = 
-	#ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE = 
-	#ADDON_INCLUDES_EXCLUDE += 
 
 vs:
-	# source files, these will be usually parsed from the file system looking
-	# in the src folders in libs and the root of the addon. if your addon needs
-	# to include files in different places or a different set of files per platform
-	# they can be specified here
-	#ADDON_SOURCES += 
-	#ADDON_SOURCES += 
-
-	# include search paths, this will be usually parsed from the file system
-	# but if the addon or addon libraries need special search paths they can be
-	# specified here separated by spaces or one per line using +=
-	#ADDON_INCLUDES += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE += 
 
 linuxarmv6l:
-	# linux only, any library that should be included in the project using
-	# pkg-config
-	#ADDON_PKG_CONFIG_LIBRARIES = 
-
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	#ADDON_SOURCES_EXCLUDE = 
-	#ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE = 
-	#ADDON_INCLUDES_EXCLUDE += 
-	#ADDON_INCLUDES_EXCLUDE += 
 
 linuxarmv7l:
 	# linux only, any library that should be included in the project using
 	# pkg-config
 	ADDON_PKG_CONFIG_LIBRARIES = fftw3
-	ADDON_PKG_CONFIG_LIBRARIES += fftw3f	
-
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	#ADDON_SOURCES_EXCLUDE = 
-	#ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE = 
-	#ADDON_INCLUDES_EXCLUDE += 
-	#ADDON_INCLUDES_EXCLUDE += 
+	ADDON_PKG_CONFIG_LIBRARIES += fftw3f
 
 android/armeabi:	
 
 android/armeabi-v7a:	
 
 osx:
-	# when parsing the file system looking for sources exclude this for all or
-	# a specific platform
-	#ADDON_SOURCES_EXCLUDE = 
-	#ADDON_SOURCES_EXCLUDE += 
-
-	# when parsing the file system looking for include paths exclude this for all or
-	# a specific platform
-	#ADDON_INCLUDES_EXCLUDE = 
-	#ADDON_INCLUDES_EXCLUDE +=
 
 ios:
-
-
