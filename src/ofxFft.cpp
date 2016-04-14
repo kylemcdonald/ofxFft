@@ -14,7 +14,7 @@ ofxFft* ofxFft::create(int signalSize, fftWindowType windowType, fftImplementati
 		#ifdef OFX_FFT_USE_FFTW
 			fft = new ofxFftw();
 		#else
-			ofLog(OF_LOG_FATAL_ERROR, "You need to add define OFX_FFT_USE_FFTW");
+			#error You need to define OFX_FFT_USE_FFTW in your C++ flags for FFTW support
 		#endif
 	}
 	fft->setup(signalSize, windowType);
