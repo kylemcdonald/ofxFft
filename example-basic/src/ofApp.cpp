@@ -6,9 +6,9 @@ void ofApp::setup() {
 	plotHeight = 128;
 	bufferSize = 2048;
 	
-	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
+	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
 	// To use FFTW, try:
-	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
+	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
 	
 	drawBins.resize(fft->getBinSize());
 	middleBins.resize(fft->getBinSize());

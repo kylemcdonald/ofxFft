@@ -34,7 +34,7 @@ void ofApp::setup() {
 }
 
 void ofApp::draw() {
-	ofSetColor(0xffffff);
+	ofSetHexColor(0xffffff);
 	ofPushMatrix();
 
 	glTranslatef(16, 16, 0);
