@@ -77,12 +77,16 @@ msys2:
 vs:
 
 linuxarmv6l:
-
-linuxarmv7l:
-	# linux only, any library that should be included in the project using
-	# pkg-config
+	# use fftw by default
 	ADDON_PKG_CONFIG_LIBRARIES = fftw3
 	ADDON_PKG_CONFIG_LIBRARIES += fftw3f
+	ADDON_CFLAGS += -DOFX_FFT_USE_FFTW
+
+linuxarmv7l:
+	# use fftw by default
+	ADDON_PKG_CONFIG_LIBRARIES = fftw3
+	ADDON_PKG_CONFIG_LIBRARIES += fftw3f
+	ADDON_CFLAGS += -DOFX_FFT_USE_FFTW
 
 android/armeabi:	
 
