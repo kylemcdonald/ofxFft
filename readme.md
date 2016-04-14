@@ -8,14 +8,18 @@ ofxFft wraps two libraries with the same interface: FFTW and KISS FFT. KISS FFT 
 
 To install ofxFft, move the ofxFft folder to your `of/addons/` folder.
 
-Basic usage is demonstrated by example-eq and example-basic.
-
 Search paths required when using ofxFFt:
 
 - `of/addons/ofxFft/src`  
 - `of/addons/ofxFft/libs/kiss`
 
-With OF version 0.9.0, the Project Generator will add the compiler search paths for the project automatically if configured to include ofxFft.
+Basic usage is demonstrated by example-eq and example-basic.
+
+With OF version 0.9.0, the OF Project Generator will add the compiler search paths for the project automatically if configured to include ofxFft.
+
+Project files for the examples are not included so you will need to generate the project files for your operating system and development environment using the OF ProjectGenerator which is included with the OpenFrameworks distribution.
+
+Point the ProjectGenerator to `addons/ofxFft`, change the project name to the **exact** name of the example you want to generate (ie `example-basic`), and make sure to choose `ofxFft` from the addons. Hitting "Generate" will populate that example with the project files you will need to build it.
 
 ## Using FFTW
 
