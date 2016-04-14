@@ -1,22 +1,27 @@
-# ofxFft is an addon for [openFrameworks](http://openframeworks.cc)
+# ofxFft
 
-ofxFft wraps two libraries with the same interface: FFTW and KISS FFT. KISS FFT is included with OF, MIT licensed, and enabled by default. FFTW is GPL, and can be enabled using the `OFX_FFT_USE_FFTW` compiler define.
+ofxFft is a Fast-Fourier Transform addon for [openFrameworks](http://openframeworks.cc)
 
-To use ofxFft with FFTW make sure you download the [precompiled libraries](https://github.com/downloads/kylemcdonald/ofxFft/fftw-libs.zip).
+ofxFft wraps two libraries with the same interface: FFTW and KISS FFT. KISS FFT is included with OF, MIT licensed, and enabled by default. FFTW is GPL and must be manually enabled using the `OFX_FFT_USE_FFTW` compiler define.
 
-Basic usage is demonstrated by example-eq and example-basic.
+## Installation & Usage
 
 To install ofxFft, move the ofxFft folder to your `of/addons/` folder.
 
-Note: With ofx version 0.9.0, the project generator should add the compiler search paths for the project automatically if configured to include ofxFft.
+Basic usage is demonstrated by example-eq and example-basic.
 
-With each project, you need to:
+Search paths required when using ofxFFt:
 
-1. Add to your compiler search path:
-  - `of/addons/ofxFft/src`  
-  - `of/addons/ofxFft/libs/kiss`
+- `of/addons/ofxFft/src`  
+- `of/addons/ofxFft/libs/kiss`
 
-2. If you're using FFTW, you'll need to add `OFX_FFT_USE_FFTW` to your compiler flags:
+With OF version 0.9.0, the Project Generator will add the compiler search paths for the project automatically if configured to include ofxFft.
+
+## Using FFTW
+
+To use ofxFft with FFTW instead of KISS FFT, make sure you download the [precompiled libraries](https://github.com/downloads/kylemcdonald/ofxFft/fftw-libs.zip).
+
+Next, you'll need to add `OFX_FFT_USE_FFTW` to your compiler flags for each project using ofxFFT:
 
   - Xcode:
 	* Select the Project -> Build Settings -> Other C++ Flags
@@ -50,24 +55,25 @@ With each project, you need to:
 	</pre>
 
 3. If you're using FFTW on Windows, you'll also need to add:
-  - `of/addons/ofxFft/libs/fftw/include`
-
+  <pre>
+  `of/addons/ofxFft/libs/fftw/include`
+  </pre>
   And link with:
-  - `of/addons/ofxFft/libs/fftw/lib/win32/libfftw3f-3.dll`
+  <pre>
+  `of/addons/ofxFft/libs/fftw/lib/win32/libfftw3f-3.dll`
+  </pre>
 
-If you're not using FFTW, you'll need to:
+### Using FFTW in the examples
 
-1. From ofxFft.h, remove the line:
+If you're using FFTW with the example projects, in ofApp.cpp, comment the line:
 
-	#define USE_FFTW
+	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
 
-2. In the example projects ofApp.cpp, uncomment the line:
-
-	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
-
-	and comment out the line:
+and uncomment out the line:
 	
-	fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
+	//fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
+
+### FFTW compilation notes
 
 FFTW was compiled with:
 
