@@ -41,11 +41,6 @@ void ofxEasyFft::update() {
 	normalize(bins);
 }
 
-
-//void ofxEasyFft::audioReceived(ofAudioEventArgs & args){
-//    audioReceived(args.buffer, args.bufferSize, args.nChannels);
-//}
-
 vector<float>& ofxEasyFft::getAudio() {
 	return audioFront;
 }

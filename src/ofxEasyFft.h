@@ -17,7 +17,6 @@ public:
 	vector<float>& getAudio();
 	vector<float>& getBins();
 	
-	//void audioReceived(ofAudioEventArgs & args);
 	void audioReceived(float* input, int bufferSize, int nChannels);
 	
 	ofxFft* fft;
