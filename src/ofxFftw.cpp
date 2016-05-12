@@ -1,5 +1,7 @@
 #include "ofxFftw.h"
 
+#ifdef OFX_FFT_USE_FFTW
+
 ofxFftw::ofxFftw() :
 	fftPlan(NULL) {
 }
@@ -57,3 +59,5 @@ ofxFftw::~ofxFftw() {
 		fftwf_cleanup();
 	}
 }
+
+#endif

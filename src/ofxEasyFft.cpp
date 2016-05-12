@@ -9,7 +9,8 @@ ofxEasyFft::~ofxEasyFft(){
 
 void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementation implementation, int audioBufferSize, int audioSampleRate) {
 	if(bufferSize < audioBufferSize) {
-		ofLogFatalError() << "ofxEasyFft bufferSize (" << bufferSize << ") must be less than the audioBufferSize (" << audioBufferSize << ")";
+		ofLogWarning("ofxEasyFft") << "bufferSize (" << bufferSize << ") less than audioBufferSize (" << audioBufferSize << "), using " << audioBufferSize;
+		bufferSize = audioBufferSize;
 	}
 	fft = ofxFft::create(bufferSize, windowType, implementation);
 	
@@ -23,8 +24,6 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
     stream.getDeviceList();
     stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
     stream.setInput(this);
-    
-
 }
 
 void ofxEasyFft::setUseNormalization(bool useNormalization) {
@@ -41,11 +40,6 @@ void ofxEasyFft::update() {
 	copy(curFft, curFft + fft->getBinSize(), bins.begin());
 	normalize(bins);
 }
-
-
-//void ofxEasyFft::audioReceived(ofAudioEventArgs & args){
-//    audioReceived(args.buffer, args.bufferSize, args.nChannels);
-//}
 
 vector<float>& ofxEasyFft::getAudio() {
 	return audioFront;

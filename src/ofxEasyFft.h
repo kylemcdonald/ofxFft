@@ -9,15 +9,14 @@ public:
     ~ofxEasyFft();
 	void setup(int bufferSize = 512,
 						 fftWindowType windowType = OF_FFT_WINDOW_HAMMING,
-						 fftImplementation implementation = OF_FFT_FFTW,
+						 fftImplementation implementation = OF_FFT_BASIC,
 						 int audioBufferSize = 256,
-						 int audioSampleRate = 48000);
+						 int audioSampleRate = 44100);
 	void setUseNormalization(bool useNormalization);
 	void update();
 	vector<float>& getAudio();
 	vector<float>& getBins();
 	
-	//void audioReceived(ofAudioEventArgs & args);
 	void audioReceived(float* input, int bufferSize, int nChannels);
 	
 	ofxFft* fft;
