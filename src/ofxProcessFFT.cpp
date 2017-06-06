@@ -5,7 +5,7 @@ void ProcessFFT::setup(){
     scaleFactor = 10000;
     numBins = 16384;
     
-    fft.setup(numBins); //default
+    fft.setup(); //default
     fft.setUseNormalization(false);
     
     graphMaxSize = 200; //approx 10sec of history at 60fps
