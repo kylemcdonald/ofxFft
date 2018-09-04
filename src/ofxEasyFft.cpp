@@ -7,7 +7,8 @@ ofxEasyFft::~ofxEasyFft(){
     stream.close();
 }
 
-void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementation implementation, int audioBufferSize, int audioSampleRate) {
+void ofxEasyFft::setup(ofSoundStreamSettings settings, int bufferSize, fftWindowType windowType, fftImplementation implementation) {
+	int audioBufferSize = settings.bufferSize;
 	if(bufferSize < audioBufferSize) {
 		ofLogWarning("ofxEasyFft") << "bufferSize (" << bufferSize << ") less than audioBufferSize (" << audioBufferSize << "), using " << audioBufferSize;
 		bufferSize = audioBufferSize;
@@ -21,9 +22,26 @@ void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementati
 	audioBack.resize(bufferSize);
 	audioRaw.resize(bufferSize);
 	
-    stream.getDeviceList();
-    stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
-    stream.setInput(this);
+	stream.setup(settings);
+	//stream.setup(0, 1, audioSampleRate, audioBufferSize, 2);
+	stream.setInput(this);
+
+}
+
+void ofxEasyFft::setup(int bufferSize, fftWindowType windowType, fftImplementation implementation, int audioBufferSize, int audioSampleRate) {
+	ofSoundStreamSettings settings;
+
+	stream.printDeviceList();
+
+	auto devices = stream.getMatchingDevices("default");
+	if(!devices.empty()){
+	  settings.setInDevice(devices[0]);
+	}
+	
+	settings.sampleRate = audioSampleRate;
+	settings.bufferSize = audioBufferSize;
+	settings.numInputChannels = 1;
+	setup(settings, bufferSize, windowType, implementation);
 }
 
 void ofxEasyFft::setUseNormalization(bool useNormalization) {

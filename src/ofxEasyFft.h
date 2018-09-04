@@ -7,6 +7,10 @@ class ofxEasyFft : public ofBaseSoundInput{
 public:
 	ofxEasyFft();
     ~ofxEasyFft();
+  	void setup(ofSoundStreamSettings settings,
+						 int bufferSize = 512,
+						 fftWindowType windowType = OF_FFT_WINDOW_HAMMING,
+						 fftImplementation implementation = OF_FFT_BASIC);
 	void setup(int bufferSize = 512,
 						 fftWindowType windowType = OF_FFT_WINDOW_HAMMING,
 						 fftImplementation implementation = OF_FFT_BASIC,

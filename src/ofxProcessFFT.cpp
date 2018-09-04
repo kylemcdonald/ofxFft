@@ -1,11 +1,16 @@
 #include "ofxProcessFFT.h"
 
 void ProcessFFT::setup(){
-    
+    ofSoundStreamSettings settings;
+    setup(settings);
+}
+
+//---------------------------------------------
+void ProcessFFT::setup(ofSoundStreamSettings settings) {
     scaleFactor = 10000;
     numBins = 16384;
     
-    fft.setup(numBins); //default
+    fft.setup(settings, numBins); //default
     fft.setUseNormalization(false);
     
     graphMaxSize = 200; //approx 10sec of history at 60fps
@@ -27,7 +32,6 @@ void ProcessFFT::setup(){
     
     normalize = false;
     volumeRange = 400; //only used if normalize is false
-
 }
 
 //---------------------------------------------

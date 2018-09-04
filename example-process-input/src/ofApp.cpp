@@ -3,8 +3,17 @@
 void ofApp::setup() {
 	ofSetVerticalSync(true);	
 	ofSetFrameRate(60);
-	fft.setup();
-    
+
+	ofSoundStreamSettings settings;
+	ofSoundStream soundStream;
+	soundStream.printDeviceList();
+	auto devices = soundStream.getMatchingDevices("default");
+	if(!devices.empty()){
+		settings.setInDevice(devices[0]);
+	}
+	settings.numInputChannels = 1;
+
+	fft.setup(settings);
 }
 
 void ofApp::update() {
