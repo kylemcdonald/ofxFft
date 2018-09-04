@@ -15,6 +15,7 @@ public:
 
 	int plotHeight, bufferSize;
 
+	ofSoundStream soundStream;
 	ofxFft* fft;
 	
 	int spectrogramOffset;

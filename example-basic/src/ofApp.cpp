@@ -13,14 +13,25 @@ void ofApp::setup() {
 	drawBins.resize(fft->getBinSize());
 	middleBins.resize(fft->getBinSize());
 	audioBins.resize(fft->getBinSize());
+
+	ofSoundStreamSettings settings;
+	soundStream.printDeviceList();
+	auto devices = soundStream.getMatchingDevices("default");
+	if(!devices.empty()){
+		settings.setInDevice(devices[0]);
+	}
+	settings.bufferSize = bufferSize;
+	settings.numInputChannels = 1;
+	// the rest of ofSoundStreamSetting defaults are good to go
+	soundStream.setup(settings);
+	soundStream.setInput(this);
 	
 	// 0 output channels,
 	// 1 input channel
 	// 44100 samples per second
 	// [bins] samples per buffer
 	// 4 num buffers (latency)
-	
-	ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
+	//ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
 	
 	ofBackground(0, 0, 0);
 }

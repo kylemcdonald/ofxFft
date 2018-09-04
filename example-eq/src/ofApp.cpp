@@ -28,7 +28,19 @@ void ofApp::setup() {
 	appWidth = ofGetWidth();
 	appHeight = ofGetHeight();
 
-	ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
+	ofSoundStreamSettings settings;
+	soundStream.printDeviceList();
+	auto devices = soundStream.getMatchingDevices("default");
+	if(!devices.empty()){
+		settings.setInDevice(devices[0]);
+	}
+	settings.bufferSize = bufferSize;
+	settings.numInputChannels = 1;
+	// the rest of ofSoundStreamSetting defaults are good to go
+	soundStream.setup(settings);
+	soundStream.setInput(this);
+	
+	//ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
 
 	ofBackground(0, 0, 0);
 }
